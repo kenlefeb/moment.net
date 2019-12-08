@@ -1,7 +1,6 @@
-using System;
 using NUnit.Framework;
 using Shouldly;
-using TimeZoneConverter;
+using System;
 
 namespace moment.net.Tests
 {
@@ -14,7 +13,7 @@ namespace moment.net.Tests
             var millisecondsElapsed = dateTime.UnixTimestampInMilliseconds();
             millisecondsElapsed.ShouldBe(365.0 * 24 * 60 * 60 * 1000);
         }
-        
+
         [Test]
         public void UnixTimeInSecondsOneUtcYearFromEpoch()
         {
@@ -26,8 +25,8 @@ namespace moment.net.Tests
         [Test]
         public void UnixTimeInSecondsOneLocalYearFromEpoch()
         {
-            var tz = TZConvert.GetTimeZoneInfo("Pacific Standard Time");
-            var dateTime = TimeZoneInfo.ConvertTime(new DateTime(1971, 01, 01, 8, 0, 0, DateTimeKind.Local), tz);
+            var tz = TimeZoneInfo.Local;
+            var dateTime = TimeZoneInfo.ConvertTime(new DateTime(1971, 01, 01, 0, 0, 0, DateTimeKind.Utc), tz);
             var secondsElapsed = dateTime.UnixTimestampInSeconds();
             secondsElapsed.ShouldBe(365.0 * 24 * 60 * 60);
         }
